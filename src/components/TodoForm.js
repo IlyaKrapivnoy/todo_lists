@@ -6,10 +6,9 @@ const TodoForm = () => {
   const { dispatch } = useContext(Store);
 
   const [todo, setTodo] = useState("");
-   
 
   const handleTodoChange = e => {
-    // const id = Math.floor(Math.random() * 1000) + 1;
+    const id = Math.floor(Math.random() * 1000) + 1;
     setTodo(e.target.value);
      
   };
