@@ -9,7 +9,7 @@ import {
   ListItemIcon,
   ListItemText
 } from "@material-ui/core";
-import { GitHub, Twitter } from "@material-ui/icons";
+import { GitHub } from "@material-ui/icons";
 
 const useStyles = makeStyles({
   list: {

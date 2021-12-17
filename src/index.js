@@ -13,7 +13,7 @@ import { usePersistedContext, usePersistedReducer } from "./usePersist";
 
 // Metarial-UI Theme(Dark or Light)
 import { ThemeProvider } from "@material-ui/core/styles";
-import { createMuiTheme, CssBaseline, Container } from "@material-ui/core";
+import { createTheme, CssBaseline, Container } from "@material-ui/core";
 
 const App = () => {
   const globalStore = usePersistedContext(useContext(Store), "state");
@@ -23,7 +23,7 @@ const App = () => {
     "state"
   );
 
-  const theme = createMuiTheme({
+  const theme = createTheme({
     palette: {
       type: state.myTheme // "light" or "dark"
     }
