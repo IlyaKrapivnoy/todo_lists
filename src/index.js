@@ -5,6 +5,7 @@ import ReactDOM from "react-dom";
 import NavBar from "./components/NavBar";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
+import CompletedTodoList from "./components/CompletedTodoList";
 
 //Add context, reducer and usePersist(LocalStorage)
 import Store from "./context";
@@ -37,6 +38,7 @@ const App = () => {
           <NavBar />
           <TodoForm />
           <TodoList />
+          <CompletedTodoList />
         </ThemeProvider>
       </Store.Provider>
     </Container>
