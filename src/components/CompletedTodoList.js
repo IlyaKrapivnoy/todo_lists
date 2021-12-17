@@ -1,13 +1,14 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import Store from "../context";
+import DeleteIcon from "@material-ui/icons/Delete";
 import {
   List,
   ListItem,
   ListItemSecondaryAction,
   ListItemText,
+  IconButton,
   Grid,
-  Typography,
-  Checkbox
+  Typography
 } from "@material-ui/core";
 
 const TodoList = () => {
@@ -21,36 +22,28 @@ const TodoList = () => {
     comment = "";
   }
 
-const [checked, setChecked] = useState([]);
-
-const handleCheckboxChange = (id) => {
-    if (checked.includes(id)) {
-        setChecked(checked => checked.filter(c => c !== c))
-    } else {
-        setChecked(checked => [...checked, id])
-    }
-}
-
   return (
     <div>
       <br />
       <br />
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Typography variant="h6">Todo List ({count})</Typography>
+          <Typography variant="h6">Completed Todo List ({count})</Typography>
           <Typography>{comment}</Typography>
           <br />
           <div>
             <List>
-              {state.todos.map((todo, id) => (
+              {state.todos.map(todo => (
                 <ListItem divider key={todo.id}>
                   <ListItemText primary={todo.text} />
                   <ListItemSecondaryAction>
-                  <Checkbox
-                    onChange={() => handleCheckboxChange(id)}
-                    checked={checked.includes(id)}
-                    inputProps={{ 'aria-label': 'primary checkbox' }}
-                  />
+                    <IconButton
+                      edge="end"
+                      aria-label="delete"
+                      onClick={() => dispatch({ type: "DELETE", payload: todo })}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
                   </ListItemSecondaryAction>
                 </ListItem>
               ))}
