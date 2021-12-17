@@ -34,8 +34,8 @@ const TodoList = () => {
           <div>
             <List>
               {state.todos.map(todo => (
-                <ListItem divider key={todo}>
-                  <ListItemText primary={todo} />
+                <ListItem divider key={todo.id}>
+                  <ListItemText primary={todo.text} />
                   <ListItemSecondaryAction>
                     <IconButton
                       edge="end"
