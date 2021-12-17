@@ -21,12 +21,15 @@ const TodoList = () => {
     comment = "";
   }
 
-  const [checked, setChecked] = useState(false);
+const [checked, setChecked] = useState([]);
 
-  const handleChange = (event) => {
-    setChecked(event.target.checked);
-  };
-
+const handleCheckboxChange = (id) => {
+    if (checked.includes(id)) {
+        setChecked(checked => checked.filter(c => c !== c))
+    } else {
+        setChecked(checked => [...checked, id])
+    }
+}
 
   return (
     <div>
@@ -39,13 +42,13 @@ const TodoList = () => {
           <br />
           <div>
             <List>
-              {state.todos.map(todo => (
+              {state.todos.map((todo, id) => (
                 <ListItem divider key={todo.id}>
                   <ListItemText primary={todo.text} />
                   <ListItemSecondaryAction>
                   <Checkbox
-                    checked={checked}
-                    onChange={handleChange}
+                    onChange={() => handleCheckboxChange(id)}
+                    checked={checked.includes(id)}
                     inputProps={{ 'aria-label': 'primary checkbox' }}
                   />
                   </ListItemSecondaryAction>
