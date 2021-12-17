@@ -1,14 +1,13 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import Store from "../context";
-import DeleteIcon from "@material-ui/icons/Delete";
 import {
   List,
   ListItem,
   ListItemSecondaryAction,
   ListItemText,
-  IconButton,
   Grid,
-  Typography
+  Typography,
+  Checkbox
 } from "@material-ui/core";
 
 const TodoList = () => {
@@ -21,6 +20,13 @@ const TodoList = () => {
   } else {
     comment = "";
   }
+
+  const [checked, setChecked] = useState(false);
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  };
+
 
   return (
     <div>
@@ -37,13 +43,11 @@ const TodoList = () => {
                 <ListItem divider key={todo.id}>
                   <ListItemText primary={todo.text} />
                   <ListItemSecondaryAction>
-                    <IconButton
-                      edge="end"
-                      aria-label="delete"
-                      onClick={() => dispatch({ type: "DELETE", payload: todo })}
-                    >
-                      <DeleteIcon />
-                    </IconButton>
+                  <Checkbox
+                    checked={checked}
+                    onChange={handleChange}
+                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                  />
                   </ListItemSecondaryAction>
                 </ListItem>
               ))}
