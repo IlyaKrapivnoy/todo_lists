@@ -33,14 +33,14 @@ const TodoList = () => {
           <br />
           <div>
             <List>
-              {state.todos.map(t => (
-                <ListItem divider key={t}>
-                  <ListItemText primary={t} />
+              {state.todos.map(todo => (
+                <ListItem divider key={todo}>
+                  <ListItemText primary={todo} />
                   <ListItemSecondaryAction>
                     <IconButton
                       edge="end"
                       aria-label="delete"
-                      onClick={() => dispatch({ type: "DELETE", payload: t })}
+                      onClick={() => dispatch({ type: "DELETE", payload: todo })}
                     >
                       <DeleteIcon />
                     </IconButton>

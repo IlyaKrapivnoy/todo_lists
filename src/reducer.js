@@ -14,7 +14,7 @@ const reducer = (state, action) => {
     case "DELETE":
       return {
         ...state,
-        todos: state.todos.filter(t => t !== action.payload)
+        todos: state.todos.filter(todo => todo !== action.payload)
       };
     case "THEME":
       return {
