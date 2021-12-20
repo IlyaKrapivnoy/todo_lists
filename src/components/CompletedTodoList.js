@@ -14,12 +14,12 @@ import {
 const TodoList = () => {
   const { state, dispatch } = useContext(Store);
 
-  const filterTodos = todos => todos.filter((item) => item.checked);
+  const checkedTodos = todos => todos.filter((item) => item.checked);
 
-  const [completedTodos, setCompletedTodos] = useState(filterTodos(state.todos));
+  const [completedTodos, setCompletedTodos] = useState(checkedTodos(state.todos));
 
   useEffect(() => {
-    setCompletedTodos(filterTodos(state.todos))
+    setCompletedTodos(checkedTodos(state.todos))
   }, [state.todos])
 
   let count = completedTodos.length;
