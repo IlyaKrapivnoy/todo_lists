@@ -22,7 +22,7 @@ const TodoList = () => {
     setCompletedTodos(filterTodos(state.todos))
   }, [state.todos])
 
-  let count = state.todos.length;
+  let count = completedTodos.length;
   let comment;
   if (count === 0) {
     comment = "So when you are free, start another work to get tired!";
