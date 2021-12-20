@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Store from "../context";
 import DeleteIcon from "@material-ui/icons/Delete";
 import {
@@ -14,7 +14,15 @@ import {
 const TodoList = () => {
   const { state, dispatch } = useContext(Store);
 
-  let count = state.todos.length;
+  const checkedTodos = todos => todos.filter((item) => item.checked);
+
+  const [completedTodos, setCompletedTodos] = useState(checkedTodos(state.todos));
+
+  useEffect(() => {
+    setCompletedTodos(checkedTodos(state.todos))
+  }, [state.todos])
+
+  let count = completedTodos.length;
   let comment;
   if (count === 0) {
     comment = "So when you are free, start another work to get tired!";
@@ -33,7 +41,7 @@ const TodoList = () => {
           <br />
           <div>
             <List>
-              {state.todos.map(todo => (
+              {completedTodos.map(todo => (
                 <ListItem divider key={todo.id}>
                   <ListItemText primary={todo.text} />
                   <ListItemSecondaryAction>

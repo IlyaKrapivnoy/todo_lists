@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Store from "../context";
 import {
   List,
@@ -13,23 +13,22 @@ import {
 const TodoList = () => {
   const { state, dispatch } = useContext(Store);
 
+  const filterTodos = todos => todos.filter((item) => !item.checked);
+
+  const [filteredTodos, setFilteredTodos] = useState(filterTodos(state.todos));
+
+  useEffect(() => {
+    setFilteredTodos(filterTodos(state.todos))
+  }, [state.todos])
+
   let count = state.todos.length;
+  console.log(state.todos)
   let comment;
   if (count === 0) {
     comment = "So when you are free, start another work to get tired!";
   } else {
     comment = "";
   }
-
-const [checked, setChecked] = useState([]);
-
-const handleCheckboxChange = (id) => {
-    if (checked.includes(id)) {
-        setChecked(checked => checked.filter(c => c !== c))
-    } else {
-        setChecked(checked => [...checked, id])
-    }
-}
 
   return (
     <div>
@@ -42,13 +41,13 @@ const handleCheckboxChange = (id) => {
           <br />
           <div>
             <List>
-              {state.todos.map((todo, id) => (
+              {filteredTodos.map((todo, id) => (
                 <ListItem divider key={todo.id}>
                   <ListItemText primary={todo.text} />
                   <ListItemSecondaryAction>
                   <Checkbox
-                    onChange={() => handleCheckboxChange(id)}
-                    checked={checked.includes(id)}
+                    onChange={() => dispatch({ type: "TOGGLE_TODO_IS_COMPLETED", payload: todo.id })}
+                    checked={todo.checked}
                     inputProps={{ 'aria-label': 'primary checkbox' }}
                   />
                   </ListItemSecondaryAction>
