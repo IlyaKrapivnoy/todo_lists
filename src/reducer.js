@@ -1,15 +1,21 @@
 const reducer = (state, action) => {
   switch (action.type) {
     case "ADD_TODO":
+      console.log(action.payload)
       if (!action.payload) {
         return state;
       }
       if (state.todos.includes(action.payload)) {
         return state;
       }
+      const uniqId = Math.floor(Math.random() * 1000) + 1;
       return {
         ...state,
-        todos: [...state.todos, action.payload]
+        todos: [...state.todos, {
+          id: uniqId,
+          text: action.payload,
+          checked: false
+        }]
       };
     case "DELETE":
       return {
@@ -21,6 +27,16 @@ const reducer = (state, action) => {
         ...state,
         myTheme: action.payload
       };
+    case "TOGGLE_TODO_IS_COMPLETED":
+      return {
+        ...state,
+        todos: state.todos.map((item) => { 
+          if(item.id === action.payload) {
+            item.checked = !item.checked
+          }
+          return item;
+         }),
+      }
     default:
       return state;
   }
