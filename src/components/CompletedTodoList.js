@@ -8,7 +8,8 @@ import {
   ListItemText,
   IconButton,
   Grid,
-  Typography
+  Typography,
+  Checkbox
 } from "@material-ui/core";
 
 const TodoList = () => {
@@ -43,6 +44,11 @@ const TodoList = () => {
             <List>
               {completedTodos.map(todo => (
                 <ListItem divider key={todo.id}>
+                    <Checkbox
+                      onChange={() => dispatch({ type: "TOGGLE_TODO_IS_COMPLETED", payload: todo.id })}
+                      checked={todo.checked}
+                      inputProps={{ 'aria-label': 'primary checkbox' }}
+                    />
                   <ListItemText primary={todo.text} />
                   <ListItemSecondaryAction>
                     <IconButton
