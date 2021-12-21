@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Store from "../context";
 import DeleteIcon from "@material-ui/icons/Delete";
+import { makeStyles } from '@material-ui/core/styles';
 import {
   List,
   ListItem,
@@ -12,7 +13,14 @@ import {
   Checkbox
 } from "@material-ui/core";
 
+const useStyles = makeStyles(theme => ({
+  todoText: {
+    textDecoration: 'line-through'
+  }
+}));
+
 const TodoList = () => {
+  const classes = useStyles();
   const { state, dispatch } = useContext(Store);
 
   const checkedTodos = todos => todos.filter((item) => item.checked);
@@ -49,7 +57,7 @@ const TodoList = () => {
                       checked={todo.checked}
                       inputProps={{ 'aria-label': 'primary checkbox' }}
                     />
-                  <ListItemText primary={todo.text} />
+                  <ListItemText primary={todo.text} className={classes.todoText} />
                   <ListItemSecondaryAction>
                     <IconButton
                       edge="end"
