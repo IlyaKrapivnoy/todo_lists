@@ -21,8 +21,8 @@ const reducer = (state, action) => {
       };
     case "DELETE":
       return {
-        ...state,
-        todos: state.todos.filter(todo => todo !== action.payload)
+          ...state,
+          todos: state.todos.filter((todo) => todo.id !== action.payload),
       };
     case "THEME":
       return {
