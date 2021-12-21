@@ -14,47 +14,53 @@ const TodoList = () => {
 
   const filterTodos = todos => todos.filter((item) => !item.checked);
 
-  const [filteredTodos, setFilteredTodos] = useState(filterTodos(state.todos));
+  const [currentTodos, setCurrentTodos] = useState(filterTodos(state.todos));
 
   useEffect(() => {
-    setFilteredTodos(filterTodos(state.todos))
-  }, [state.todos])
+      setCurrentTodos(filterTodos(state.todos));
+  }, [state.todos]);
 
-  let count = state.todos.length;
-  console.log(state.todos)
+  let count = currentTodos.length;
   let comment;
   if (count === 0) {
-    comment = "So when you are free, start another work to get tired!";
+      comment = 'So when you are free, start another work to get tired!';
   } else {
-    comment = "";
+      comment = '';
   }
 
   return (
-    <div>
-      <br />
-      <br />
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Typography variant="h6">Todo List ({count})</Typography>
-          <Typography>{comment}</Typography>
+      <div>
           <br />
-          <div>
-            <List>
-              {filteredTodos.map((todo, id) => (
-                <ListItem divider key={todo.id}>
-                    <Checkbox
-                      onChange={() => dispatch({ type: "TOGGLE_TODO_IS_COMPLETED", payload: todo.id })}
-                      checked={todo.checked}
-                      inputProps={{ 'aria-label': 'primary checkbox' }}
-                    />
-                  <ListItemText primary={todo.text} />
-                </ListItem>
-              ))}
-            </List>
-          </div>
-        </Grid>
-      </Grid>
-    </div>
+          <br />
+          <Grid container spacing={2}>
+              <Grid item xs={12}>
+                  <Typography variant='h6'>Todo List ({count})</Typography>
+                  <Typography>{comment}</Typography>
+                  <br />
+                  <div>
+                      <List>
+                          {currentTodos.map((todo, id) => (
+                              <ListItem divider key={todo.id}>
+                                  <Checkbox
+                                      onChange={() =>
+                                          dispatch({
+                                              type: 'TOGGLE_TODO_IS_COMPLETED',
+                                              payload: todo.id,
+                                          })
+                                      }
+                                      checked={todo.checked}
+                                      inputProps={{
+                                          'aria-label': 'primary checkbox',
+                                      }}
+                                  />
+                                  <ListItemText primary={todo.text} />
+                              </ListItem>
+                          ))}
+                      </List>
+                  </div>
+              </Grid>
+          </Grid>
+      </div>
   );
 };
 export default TodoList;
