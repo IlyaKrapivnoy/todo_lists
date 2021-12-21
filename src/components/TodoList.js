@@ -21,7 +21,6 @@ const TodoList = () => {
   }, [state.todos]);
 
   let count = currentTodos.length;
-  console.log(state.todos);
   let comment;
   if (count === 0) {
       comment = 'So when you are free, start another work to get tired!';
