@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Store from "../context";
 import DeleteIcon from "@material-ui/icons/Delete";
+import { makeStyles } from '@material-ui/core/styles';
 import {
   List,
   ListItem,
@@ -8,10 +9,18 @@ import {
   ListItemText,
   IconButton,
   Grid,
-  Typography
+  Typography,
+  Checkbox
 } from "@material-ui/core";
 
+const useStyles = makeStyles(theme => ({
+  todoText: {
+    textDecoration: 'line-through'
+  }
+}));
+
 const TodoList = () => {
+  const classes = useStyles();
   const { state, dispatch } = useContext(Store);
 
   const checkedTodos = todos => todos.filter((item) => item.checked);
@@ -43,7 +52,12 @@ const TodoList = () => {
             <List>
               {completedTodos.map(todo => (
                 <ListItem divider key={todo.id}>
-                  <ListItemText primary={todo.text} />
+                    <Checkbox
+                      onChange={() => dispatch({ type: "TOGGLE_TODO_IS_COMPLETED", payload: todo.id })}
+                      checked={todo.checked}
+                      inputProps={{ 'aria-label': 'primary checkbox' }}
+                    />
+                  <ListItemText primary={todo.text} className={classes.todoText} />
                   <ListItemSecondaryAction>
                     <IconButton
                       edge="end"

@@ -4,8 +4,11 @@ const reducer = (state, action) => {
       if (!action.payload) {
         return state;
       }
-      if (state.todos.includes(action.payload)) {
-        return state;
+      const myArr = state.todos.map((item) => {
+        return item.text;
+      });
+      if (myArr.includes(action.payload)) {
+          return state;
       }
       const uniqId = Math.floor(Math.random() * 1000) + 1;
       return {

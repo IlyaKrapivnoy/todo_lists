@@ -3,7 +3,6 @@ import Store from "../context";
 import {
   List,
   ListItem,
-  ListItemSecondaryAction,
   ListItemText,
   Grid,
   Typography,
@@ -43,14 +42,12 @@ const TodoList = () => {
             <List>
               {filteredTodos.map((todo, id) => (
                 <ListItem divider key={todo.id}>
+                    <Checkbox
+                      onChange={() => dispatch({ type: "TOGGLE_TODO_IS_COMPLETED", payload: todo.id })}
+                      checked={todo.checked}
+                      inputProps={{ 'aria-label': 'primary checkbox' }}
+                    />
                   <ListItemText primary={todo.text} />
-                  <ListItemSecondaryAction>
-                  <Checkbox
-                    onChange={() => dispatch({ type: "TOGGLE_TODO_IS_COMPLETED", payload: todo.id })}
-                    checked={todo.checked}
-                    inputProps={{ 'aria-label': 'primary checkbox' }}
-                  />
-                  </ListItemSecondaryAction>
                 </ListItem>
               ))}
             </List>

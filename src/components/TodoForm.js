@@ -21,7 +21,7 @@ const TodoForm = () => {
   };
 
   return (
-    <Grid container spacing={0}>
+    <Grid container spacing={3}>
       <Grid item xs={12} sm={10}>
         <br />
         <TextField
