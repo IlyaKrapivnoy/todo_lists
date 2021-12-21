@@ -20,7 +20,7 @@ const TodoList = () => {
       setCurrentTodos(filterTodos(state.todos));
   }, [state.todos]);
 
-  let count = state.todos.length;
+  let count = currentTodos.length;
   console.log(state.todos);
   let comment;
   if (count === 0) {
